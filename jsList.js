@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 var path = require("path");
 var glob = require("glob");
 var fs = require('fs');
@@ -7,7 +9,7 @@ var fs = require('fs');
     // retrieve the path to project.json
     var pathToProjectJson = process.argv[2];
     if (!pathToProjectJson) {
-        console.log("Usage: jsList /path/to/project.json");
+        console.log("Usage: jslist /path/to/project.json");
         return;
     }
 
