@@ -4,7 +4,7 @@ an utility to generate jsList in project.json automatically for cocos2d-js.
 ## Install
 
 ```
-$ npm install jslist
+$ sudo npm install jslist -g
 ```
 
 ## Usage

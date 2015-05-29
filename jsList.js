@@ -14,7 +14,8 @@ var fs = require('fs');
     }
 
     // read project.json and get jsListOrder config
-    var projectJson = require(pathToProjectJson);
+    var absPathToProjectJson = path.resolve(pathToProjectJson);
+    var projectJson = require(absPathToProjectJson);
 
     var jsListOrder = projectJson.jsListOrder;
     if (!jsListOrder) {
