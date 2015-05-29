@@ -21,9 +21,9 @@ first, add `jsListOrder` to project.json :
 }
 ```
 
-note: jsList use [node-glob](https://github.com/isaacs/node-glob) to match filename.
+note: jslist use [node-glob](https://github.com/isaacs/node-glob) to match filename.
 
-and then, run jsList:
+and then, run jslist:
 
 ```
 cd /path/to/your/cocos2d-js/project
@@ -36,7 +36,6 @@ list the file in order:
 
 ```
 jsListOrder: [
-  ""
   "src/**/*.js"
   "src/resource.js",
   "src/app.js"
