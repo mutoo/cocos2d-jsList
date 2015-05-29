@@ -1,6 +1,12 @@
 # cocos2d-jsList
 an utility to generate jsList in project.json automatically for cocos2d-js.
 
+## Install
+
+```
+$ npm install jslist
+```
+
 ## Usage
 
 first, add `jsListOrder` to project.json :
@@ -21,7 +27,7 @@ and then, run jsList:
 
 ```
 cd /path/to/your/cocos2d-js/project
-jsList project.json
+jslist project.json
 ```
 
 ## Advance

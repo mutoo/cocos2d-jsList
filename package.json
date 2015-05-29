@@ -1,5 +1,5 @@
 {
-  "name": "jsList",
+  "name": "jslist",
   "version": "1.0.0",
   "description": "an utility to generate jsList automatically for cocos2d-js.",
   "main": "jsList.js",
