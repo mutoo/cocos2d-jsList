@@ -1,13 +1,14 @@
 {
   "name": "jslist",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "an utility to generate jsList automatically for cocos2d-js.",
-  "main": "jsList.js",
+  "main": "jslist.js",
   "preferGlobal": "true",
   "bin": {
-    "jslist" : "jsList.js"
+    "jslist": "jslist.js"
   },
   "dependencies": {
+    "commander": "^2.8.1",
     "glob": "^5.0.10"
   },
   "devDependencies": {},

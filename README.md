@@ -4,8 +4,10 @@ an utility to generate jsList in project.json automatically for cocos2d-js.
 ## Install
 
 ```
-$ sudo npm install jslist -g
+$ npm install jslist -g
 ```
+
+install jslist to global as a cli.
 
 ## Usage
 
@@ -27,7 +29,13 @@ and then, run jslist:
 
 ```
 cd /path/to/your/cocos2d-js/project
-jslist project.json
+jslist
+```
+
+see more options:
+
+```
+jslist --help
 ```
 
 ## Advance

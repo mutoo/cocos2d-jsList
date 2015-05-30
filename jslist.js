@@ -1,22 +1,49 @@
 #! /usr/bin/env node
 
+var program = require("commander");
 var path = require("path");
 var glob = require("glob");
 var fs = require('fs');
 
+var DEFAULT_CONFIG = "./project.json";
+var DEFAULT_INDENT = 4;
+
+program
+    .version('1.0.3')
+    .option('-f, --file <path>', 'set config path. ' +
+        'defaults to ' + DEFAULT_CONFIG)
+    .option('-i, --indent <spaces>', 'set indent spaces for json file. ' +
+        'defaults to ' + DEFAULT_INDENT)
+    .parse(process.argv);
+
 (function () {
 
     // retrieve the path to project.json
-    var pathToProjectJson = process.argv[2];
-    if (!pathToProjectJson) {
-        console.log("Usage: jslist /path/to/project.json");
+    var pathToProjectJson = program.file || DEFAULT_CONFIG;
+    var absPathToProjectJson = path.resolve(pathToProjectJson);
+
+    // read project.json
+    var projectJson;
+    try {
+        projectJson = fs.readFileSync(absPathToProjectJson, 'utf8');
+
+    } catch (e) {
+        console.error("Can not read config from " + absPathToProjectJson);
+        console.error(e.toString());
         return;
     }
 
-    // read project.json and get jsListOrder config
-    var absPathToProjectJson = path.resolve(pathToProjectJson);
-    var projectJson = require(absPathToProjectJson);
+    // parse project.json
+    try {
+        projectJson = JSON.parse(projectJson);
 
+    } catch (e) {
+        console.error("Can not parse config to JSON.");
+        console.error(e.toString());
+        return;
+    }
+
+    // get jsListOrder config
     var jsListOrder = projectJson.jsListOrder;
     if (!jsListOrder) {
         console.error("Can not found 'jsListOrder' in project.json");
@@ -57,7 +84,6 @@ var fs = require('fs');
 
             jsListDict[item] = jsListTmp.length;
             jsListTmp.push(item);
-
         }
     });
 
@@ -71,12 +97,21 @@ var fs = require('fs');
     projectJson.jsList = jsListFinal;
 
     // save to project.json
-    fs.writeFile(pathToProjectJson, JSON.stringify(projectJson, null, 2), function (err) {
-        if (err) {
-            console.error(err);
+    try {
+        var indent = program.indent;
+        if (indent === 0) {
+            fs.writeFileSync(pathToProjectJson, JSON.stringify(projectJson));
+
         } else {
-            console.log("saved to " + pathToProjectJson);
+            indent = parseInt(indent) || DEFAULT_INDENT;
+            fs.writeFileSync(pathToProjectJson, JSON.stringify(projectJson, null, indent));
         }
-    });
+
+        console.log("saved to " + pathToProjectJson);
+
+    } catch (e) {
+        console.log("Can not save config to " + pathToProjectJson);
+        console.error(e.toString());
+    }
 
 })();
